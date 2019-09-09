@@ -1,13 +1,13 @@
 // const { User } = require('../models');
 // const { TokenHelper, FormHelper, ResponseHelper } = require('../helpers');
 const nodemailer = require('nodemailer');
-const config = require('../../../config');
+const config = require('../config/mail');
 
 function mail() {
 
-  let transporter = nodemailer.createTransport(config.mailConfig);
+  const transporter = nodemailer.createTransport(config.mailConfig);
 
-  let info = transporter.sendMail({
+  transporter.sendMail({
     from: 'foo@example.com',
     to: 'zuevrg@yandex.ru',
     subject: 'Hello ✔',
@@ -18,9 +18,9 @@ function mail() {
 
 module.exports = {
   signup(req, res) {
-    mail()
-      .then(res => console.log(res))
-      .catch(e => console.log(e));
+    // mail()
+    //   .then(res => console.log(res))
+    //   .catch(e => console.log(e));
     console.log(process.env.tte);
     res.send('Auth');
   }
