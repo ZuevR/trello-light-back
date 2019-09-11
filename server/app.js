@@ -12,9 +12,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1/auth', authRoutes);
 
-app.use('/', (req, res) => {
-  console.log('it works');
-  res.send('Hello')
+// app.use('/', (req, res) => {
+//   console.log('it works');
+//   res.send('Hello')
+// });
+
+app.use((error, req, res, next) => {
+  res.status(500).send(error);
 });
 
 module.exports = app;

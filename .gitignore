@@ -46,5 +46,5 @@ testem.log
 Thumbs.db
 
 # Config
-server/config
+.env
 

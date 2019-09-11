@@ -1,5 +1,4 @@
-// const { User } = require('../models');
-// const { TokenHelper, FormHelper, ResponseHelper } = require('../helpers');
+const { User } = require('../models');
 const nodemailer = require('nodemailer');
 const config = require('../config/mail');
 
@@ -17,11 +16,29 @@ function mail() {
 }
 
 module.exports = {
-  signup(req, res) {
-    // mail()
-    //   .then(res => console.log(res))
-    //   .catch(e => console.log(e));
-    console.log(process.env.tte);
-    res.send('Auth');
+
+  async signup(req, res, next) {
+    const user = new User(req.body);
+    user.setEmail();
+    user.setPassword(req.body.password);
+    user.generateEmailVerificationToken();
+    try {
+      const result = await user.save();
+
+      console.log(result);
+    } catch (e) {
+      return next(e);
+    }
+
+
+
+    // mail();
+    // console.log(user);
+    // user.save().then(res => {
+    //   console.log(res);
+    // }).catch(e => {
+    //   console.log(e);
+    // });
+    // res.send('Auth');
   }
 };
