@@ -1,44 +1,38 @@
-const { User } = require('../models');
+const { User, Token } = require('../models').models;
+const db = require('../models');
 const nodemailer = require('nodemailer');
-const config = require('../config/mail');
 
-function mail() {
-
-  const transporter = nodemailer.createTransport(config.mailConfig);
-
-  transporter.sendMail({
-    from: 'foo@example.com',
-    to: 'zuevrg@yandex.ru',
-    subject: 'Hello ✔',
-    text: 'Hello world?',
-    html: '<b>Hello world?</b>'
-  });
-}
+// function mail() {
+//
+//   const transporter = nodemailer.createTransport(config.mailConfig);
+//
+//   transporter.sendMail({
+//     from: 'foo@example.com',
+//     to: 'zuevrg@yandex.ru',
+//     subject: 'Hello ✔',
+//     text: 'Hello world?',
+//     html: '<b>Hello world?</b>'
+//   });
+// }
 
 module.exports = {
 
   async signup(req, res, next) {
     const user = new User(req.body);
-    user.setEmail();
     user.setPassword(req.body.password);
-    user.generateEmailVerificationToken();
+    let transaction;
     try {
-      const result = await user.save();
-
-      console.log(result);
+      transaction = await db.sequelize.transaction();
+      const newUser = await user.save({ transaction });
+      const verificationToken = new Token({ userId: newUser.id });
+      verificationToken.generateEmailVerificationToken();
+      console.log(verificationToken);
+      await verificationToken.save({ transaction });
+      await transaction.commit();
+      verificationToken.sendMail(newUser);
     } catch (e) {
-      return next(e);
+      if (transaction) await transaction.rollback();
+      next(e);
     }
-
-
-
-    // mail();
-    // console.log(user);
-    // user.save().then(res => {
-    //   console.log(res);
-    // }).catch(e => {
-    //   console.log(e);
-    // });
-    // res.send('Auth');
   }
 };

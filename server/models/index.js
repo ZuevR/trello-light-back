@@ -13,6 +13,7 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + '/../config/config.js')[env];
+const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, {
   dialect: config.dialect
@@ -36,5 +37,7 @@ const models = Object.assign({}, ...fs.readdirSync(__dirname)
 for (const model of Object.keys(models)) {
   typeof models[model].associate === 'function' && models[model].associate(models);
 }
+db.models = models;
+db.sequelize = sequelize;
 
-module.exports = models;
+module.exports = db;

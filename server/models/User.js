@@ -1,15 +1,10 @@
 'use strict';
+
 const Sequelize = require('sequelize');
 
 const { StringHelper } = require('../helpers');
 
 module.exports = class User extends Sequelize.Model {
-
-  constructor(data) {
-    super();
-    this.username = data.username;
-    this.email = data.email;
-  }
 
   static init(sequelize) {
     return super.init({
@@ -47,9 +42,6 @@ module.exports = class User extends Sequelize.Model {
         },
         unique: { msg: 'Email address already in use!' }
       },
-      verification_token: {
-        type: Sequelize.STRING
-      },
       status: {
         type: Sequelize.BOOLEAN,
         default: false
@@ -57,62 +49,24 @@ module.exports = class User extends Sequelize.Model {
     }, {
       sequelize,
       timestamps: false,
-      tableName: 'users'
+      tableName: 'users',
+      hooks: {
+        beforeValidate: user => {
+          user.username = user.username.trim();
+          user.email = user.email.trim().toLowerCase()
+        }
+      }
     })
   };
 
   static associate(models) {
-    // Using additional options like CASCADE etc for demonstration
-    // Can also simply do Task.belongsTo(models.User);
-
-    // this.hasMany(models.Post, {
-    //   onDelete: "CASCADE",
-    //   foreignKey: {
-    //     allowNull: false
-    //   }
-    // });
-
-    // Using additional options like CASCADE etc for demonstration
-    // Can also simply do Task.belongsTo(models.User);
-
-    // this.hasMany(models.Comment, {
-    //   onDelete: "CASCADE",
-    //   foreignKey: {
-    //     allowNull: false
-    //   }
-    // });
-  }
-
-  static save() {
-    return this.create(this);
+    this.hasOne(models.Token, { foreignKey: 'userId', as: 'token' });
   }
 
   setPassword(password) {
     if (password) {
       this.password = StringHelper.generatePasswordHash(password);
     }
-  }
-
-  setEmail() {
-    if (this.email) {
-      this.email = this.email.toLowerCase();
-    }
-  }
-
-  generateEmailVerificationToken() {
-    this.verification_token = StringHelper.generateRandomString(50);
-  }
-
-  sendEmail() {
-
-  }
-
-  serialize() {
-    return {
-      id: this.get('id'),
-      username: this.get('username'),
-      email: this.get('email')
-    };
   }
 
 };

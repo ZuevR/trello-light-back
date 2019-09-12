@@ -18,9 +18,6 @@ module.exports = {
         type: Sequelize.STRING(45),
         unique: true
       },
-      verification_token: {
-        type: Sequelize.STRING
-      },
       status: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
