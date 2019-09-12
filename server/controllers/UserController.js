@@ -29,10 +29,15 @@ module.exports = {
       console.log(verificationToken);
       await verificationToken.save({ transaction });
       await transaction.commit();
-      verificationToken.sendMail(newUser);
+      // verificationToken.sendMail(newUser);
+      res.status(201).send(newUser);
     } catch (e) {
       if (transaction) await transaction.rollback();
       next(e);
     }
+  },
+
+  confirm() {
+    console.log(1);
   }
 };

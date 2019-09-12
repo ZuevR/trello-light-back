@@ -18,7 +18,7 @@ module.exports = {
         }
       },
       expire: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       }
     });
   },

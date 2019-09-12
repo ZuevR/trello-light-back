@@ -16,7 +16,8 @@ module.exports = class Token extends Sequelize.Model {
         primaryKey: true
       },
       expire: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        defaultValue: Math.floor(Date.now() / 1000) + (3600 * 24)
       },
       verification_token: {
         type: Sequelize.STRING,
