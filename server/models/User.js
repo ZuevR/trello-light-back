@@ -52,8 +52,8 @@ module.exports = class User extends Sequelize.Model {
       tableName: 'users',
       hooks: {
         beforeValidate: user => {
-          user.username = user.username.trim();
-          user.email = user.email.trim().toLowerCase()
+          if (user.username) user.username = user.username.trim();
+          if (user.email) user.email = user.email.trim().toLowerCase()
         }
       }
     })

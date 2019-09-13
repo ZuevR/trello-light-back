@@ -1,19 +1,5 @@
 const { User, Token } = require('../models').models;
 const db = require('../models');
-const nodemailer = require('nodemailer');
-
-// function mail() {
-//
-//   const transporter = nodemailer.createTransport(config.mailConfig);
-//
-//   transporter.sendMail({
-//     from: 'foo@example.com',
-//     to: 'zuevrg@yandex.ru',
-//     subject: 'Hello ✔',
-//     text: 'Hello world?',
-//     html: '<b>Hello world?</b>'
-//   });
-// }
 
 module.exports = {
 
@@ -37,7 +23,27 @@ module.exports = {
     }
   },
 
-  confirm() {
-    console.log(1);
+  async confirm(req, res, next) {
+    const { confirmationToken, userId } = req.query;
+    try {
+      const user = await User.findOne({
+        where: { id: userId, status: false },
+        include: [{
+          model: Token,
+          as: 'token',
+          where: { verification_token: confirmationToken }
+        }]
+      });
+      if (!user) {
+        return res.status(404).send('not exist')
+      }
+      if (user.token.expire > Date.now() / 1000) {
+        const result = await user.update({ status: true });
+        console.log(result);
+      }
+    } catch (e) {
+      next(e);
+    }
   }
+
 };
