@@ -39,11 +39,16 @@ module.exports = {
       }
       if (user.token.expire > Date.now() / 1000) {
         const result = await user.update({ status: true });
-        console.log(result);
+        return res.status(200).send(result);
       }
+      return res.status(400).send(user);
     } catch (e) {
       next(e);
     }
+  },
+
+  sendVerificationEmail(req, res, next) {
+
   }
 
 };
