@@ -20,7 +20,7 @@ module.exports = {
         <p style="color:#333;font:15px / 1.25em 'helvetica neue' , 'arial' , 'helvetica'">
 
           <a
-            href="http://localhost:3000/api/v1/confirm?confirmationToken=${ token }&amp;userId=${ userId }"
+            href="http://localhost:3000/api/v1/auth/confirm?confirmationToken=${ token }&amp;userId=${ userId }"
             style="background:#3aa54c;border-radius:3px;color:#fff;display:block;font-size:16px;font-weight:700;line-height:1.25em;margin:24px auto 24px auto;padding:10px 18px 10px 18px;text-align:center;text-decoration:none;width:220px"
             data-vdir-href="https://mail.yandex.ru/re.jsx?uid=237374884&amp;c=LIZA&amp;cv=17.9.107&amp;mid=170010885933249341&amp;h=a,krI_NC6Jr-YtLWhwAQSdUw&amp;l=aHR0cHM6Ly90cmVsbG8uY29tL2NvbmZpcm0_Y29uZmlybWF0aW9uVG9rZW49NzZiN2Q0MTFjYTU5N2FmYWYyN2JlYzVmMGZhZjhiZDMmaWRNZW1iZXI9NWI5NDAzZGIwNjJiNWIwODQyZWQ0NmU3JnJldHVyblVybD0lMkY"
             data-orig-href="https://trello.com/confirm?confirmationToken=76b7d411ca597afaf27bec5f0faf8bd3&amp;idMember=5b9403db062b5b0842ed46e7&amp;returnUrl=%2F"

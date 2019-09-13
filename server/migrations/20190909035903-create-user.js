@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.STRING(45),
         unique: true
       },
+      auth_key: {
+        type: Sequelize.JSON,
+        defaultValue: null
+      },
       status: {
         type: Sequelize.BOOLEAN,
         defaultValue: false

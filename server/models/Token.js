@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const nodemailer = require('nodemailer');
 
-const { StringHelper, MailHelper } = require('../helpers');
+const { SecureHelper, MailHelper } = require('../helpers');
 const config = require('../config/smtp');
 
 module.exports = class Token extends Sequelize.Model {
@@ -36,7 +36,7 @@ module.exports = class Token extends Sequelize.Model {
   }
 
   generateEmailVerificationToken() {
-    this.verification_token = StringHelper.generateRandomString(50);
+    this.verification_token = SecureHelper.generateRandomString(50);
   }
 
   sendMail(user) {

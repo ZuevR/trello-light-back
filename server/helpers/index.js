@@ -1,7 +1,9 @@
-const StringHelper = require('./string');
+const SecureHelper = require('./string');
 const MailHelper = require('./mail');
+const FormHelper = require('./formdata');
 
 module.exports = {
-  StringHelper,
-  MailHelper
+  SecureHelper,
+  MailHelper,
+  FormHelper
 };

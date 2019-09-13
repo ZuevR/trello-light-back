@@ -2,7 +2,7 @@
 
 const Sequelize = require('sequelize');
 
-const { StringHelper } = require('../helpers');
+const { SecureHelper } = require('../helpers');
 
 module.exports = class User extends Sequelize.Model {
 
@@ -42,9 +42,13 @@ module.exports = class User extends Sequelize.Model {
         },
         unique: { msg: 'Email address already in use!' }
       },
+      auth_key: {
+        type: Sequelize.JSON,
+        defaultValue: null
+      },
       status: {
         type: Sequelize.BOOLEAN,
-        default: false
+        defaultValue: false
       }
     }, {
       sequelize,
@@ -65,8 +69,21 @@ module.exports = class User extends Sequelize.Model {
 
   setPassword(password) {
     if (password) {
-      this.password = StringHelper.generatePasswordHash(password);
+      this.password = SecureHelper.generatePasswordHash(password);
     }
+  }
+
+  validatePassword(password) {
+    return SecureHelper.comparePassword(password, this.password);
+  }
+
+  setAuthKey() {
+    const token = SecureHelper.generateToken(this);
+    return this.update({ auth_key: token });
+  }
+
+  removeAuthKey() {
+    return this.update({ auth_key: null });
   }
 
 };
