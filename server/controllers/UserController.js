@@ -14,7 +14,7 @@ module.exports = {
       verificationToken.generateEmailVerificationToken();
       await verificationToken.save({ transaction });
       await transaction.commit();
-      // verificationToken.sendMail(newUser);
+      verificationToken.sendMail(newUser);
       res.status(201).send(newUser);
     } catch (e) {
       if (transaction) await transaction.rollback();
@@ -51,7 +51,7 @@ module.exports = {
       }
       if (user.token.expire > Date.now() / 1000) {
         const result = await user.update({ status: true });
-        return res.status(200).send(result);
+        return res.status(301).redirect('http://localhost:4200/auth/login?status=' + result.status);
       }
       return res.status(400).send(user);
     } catch (e) {
