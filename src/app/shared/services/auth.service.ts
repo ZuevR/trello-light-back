@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
-import { User } from '../interfaces';
+import { AuthResponse, User } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -16,12 +16,50 @@ export class AuthService {
   ) {
   }
 
+  get token(): string {
+    const expDate = new Date(localStorage.getItem('token-exp'));
+    if (new Date() > expDate) {
+      this.logout();
+      return null;
+    }
+    return localStorage.getItem('token');
+  }
+
   signUp(user: User): Observable<any> {
     return this.http.post(`${ environment.host }/api/v1/auth/signup`, user)
       .pipe(
-        // tap(this.setToken),
         catchError(this.handleError.bind(this))
       );
+  }
+
+  login(user: User): Observable<any> {
+    return this.http.post(`${ environment.host }/api/v1/auth/signin`, user)
+      .pipe(
+        tap(this.setToken),
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  logout() {
+    this.setToken(null);
+  }
+
+  isAuth(): boolean {
+    return !!this.token;
+  }
+
+  requestNewEmail(id: number) {
+    return this.http.post(`${ environment.host }/api/v1/auth/new-email`, { id });
+  }
+
+  private setToken(response: AuthResponse | null) {
+    if (response) {
+      const expDate = new Date(response.auth_key.exp * 1000);
+      localStorage.setItem('token', response.auth_key.id);
+      localStorage.setItem('token-exp', expDate.toString());
+    } else {
+      localStorage.clear();
+    }
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {

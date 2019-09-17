@@ -1,0 +1,189 @@
+.page {
+  background: linear-gradient(to bottom, #fff 0%, #f7ecff 46%, #d2ecff 74%, #fff 100%);
+  min-height: 100vh;
+}
+
+.header {
+  padding: 40px 0;
+
+  .logo {
+    text-align: center;
+
+    img {
+      width: 140px;
+    }
+  }
+}
+
+.message-success,
+.message-failure {
+  width: 40%;
+  margin: 0 auto;
+  padding: 25px;
+  border-radius: 10px;
+  color: #ffffff;
+  background: linear-gradient(180deg, #42548e 0%, #6b668c 100%);
+  text-align: center;
+
+  h1 {
+    font-family: 'Charlie Display', sans-serif;
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+
+  h4 {
+    font-family: 'Charlie Text', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  .buttons {
+    margin-top: 25px;
+
+    .btn-yes, .btn-no {
+      border: 0;
+      border-radius: 5px;
+      outline: none;
+      margin: 0 10px;
+      padding: 10px 15px;
+      min-width: 70px;
+      cursor: pointer;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 18px;
+      color: #ffffff;
+      background-color: var(--danger-color);
+      transition: all .2s linear;
+
+      &:hover {
+        box-shadow: 0 0 3px 1px #fafbfc;
+      }
+    }
+
+    .btn-yes {
+      background-color: #43C85E;
+    }
+
+  }
+
+  .info {
+    font-family: "Charlie Text", sans-serif;
+    font-weight: 500;
+    background-color: #fff;
+    width: 40%;
+    margin: 20px auto 0;
+    padding: 15px;
+    border-radius: 10px;
+    color: var(--primary-color);
+
+    button {
+      display: block;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: 500;
+      color: #ffffff;
+      font-size: 16px;
+      width: 40%;
+      margin: 15px auto 5px;
+      background-color: rgb(0, 82, 204);
+      border: 0;
+      border-radius: 3px;
+      padding: 8px;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.1s linear;
+
+      &:hover {
+        background-color: rgb(0, 101, 255);
+      }
+    }
+  }
+}
+
+.login-section {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Ubuntu', sans-serif;
+  width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
+  color: rgb(94, 108, 132);
+  margin: 24px auto;
+  padding: 24px 40px;
+  background-color: #fff;
+  border-radius: 3px;
+
+  .error {
+    background-color: var(--danger-color);
+    color: #ffffff;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+
+  .title {
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .form {
+
+    &-control {
+      margin-top: 24px;
+
+      input {
+        width: 100%;
+        background-color: #fafbfc;
+        border: 2px solid #dfe1e6;
+        border-radius: 3px;
+        outline: none;
+        font-family: inherit;
+        font-size: 14px;
+        color: rgb(9, 30, 66);
+        padding: 8px 4px;
+        transition: border-color 0.2s ease-in-out 0s;
+
+        &:-webkit-autofill {
+          -webkit-box-shadow: inset 0 0 0 50px #fafbfc !important; /* Цвет фона */
+        }
+
+        &.ng-touched.ng-invalid {
+          border-color: var(--danger-color);
+        }
+
+      }
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+
+    button {
+      display: block;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: 500;
+      color: #ffffff;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 30px;
+      background-color: rgb(0, 82, 204);
+      border: 0;
+      border-radius: 3px;
+      padding: 8px;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.1s linear;
+
+      &:hover {
+        background-color: rgb(0, 101, 255);
+      }
+    }
+
+    .error {
+      font-family: cursive;
+      font-size: 14px;
+      color: var(--danger-color);
+      padding: 1px 2px;
+    }
+  }
+
+
+}

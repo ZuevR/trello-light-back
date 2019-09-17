@@ -1,12 +1,15 @@
 export interface User {
   id?: number;
-  username: string;
+  username?: string;
   email: string;
   password: string;
 }
 
 export interface AuthResponse {
-  auth_key: string;
+  auth_key: {
+    exp: number,
+    id: string
+  };
   email: string;
   id: number;
   password: string;

@@ -9,4 +9,6 @@ router.post('/signin', FormHelper.processForm, UserController.signin);
 
 router.get('/confirm', UserController.confirm);
 
+router.post('/new-email', UserController.sendNewVerificationEmail);
+
 module.exports = router;

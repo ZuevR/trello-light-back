@@ -3,13 +3,17 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('tokens', {
-      verification_token: {
-        type: Sequelize.STRING(50),
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull:false,
+        autoIncrement: true,
         primaryKey: true
+      },
+      verification_token: {
+        type: Sequelize.STRING(50)
       },
       userId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull:false,
         onDelete: 'CASCADE',
         references: {
