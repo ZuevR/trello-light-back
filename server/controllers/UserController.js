@@ -24,6 +24,7 @@ module.exports = {
 
   async signin(req, res, next) {
     try {
+
       const user = await User.findOne({ where: { email: req.body.email, status: true } });
       if (!user) return res.status(404).send({ errors: [{ message: 'User with this email does not exist' }] });
       if (!user.validatePassword(req.body.password)) return res.status(401).send({ errors: [{ message: 'Wrong password' }] });

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { AuthResponse, User } from '../interfaces';
 export class AuthService {
 
   public error$: Subject<string> = new Subject<string>();
+  public currentUser;
 
   constructor(
     private http: HttpClient
