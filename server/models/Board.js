@@ -13,11 +13,10 @@ module.exports = class Board extends Sequelize.Model {
         allowNull: false
       },
       title: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+      ownerId: {
+        type: Sequelize.INTEGER
       }
 
     }, {
@@ -28,7 +27,11 @@ module.exports = class Board extends Sequelize.Model {
   };
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'userId' })
+    this.belongsToMany(models.User, {
+      through: { model: models.UserBoard },
+      foreignKey: 'boardId',
+      as: 'users'
+    })
   }
 
 };

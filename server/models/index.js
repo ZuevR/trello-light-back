@@ -16,7 +16,8 @@ const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, {
-  dialect: config.dialect
+  dialect: config.dialect,
+  timestamps: false
 });
 
 // Load each model file

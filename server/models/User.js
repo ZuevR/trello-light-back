@@ -65,6 +65,11 @@ module.exports = class User extends Sequelize.Model {
 
   static associate(models) {
     this.hasOne(models.Token, { foreignKey: 'userId', as: 'token' });
+    this.belongsToMany(models.Board, {
+      through: { model: models.UserBoard },
+      foreignKey: 'userId',
+      as: 'boards'
+    });
   }
 
   setPassword(password) {

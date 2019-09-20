@@ -1,4 +1,4 @@
-const { User, Token } = require('../models').models;
+const { User, Token, Board, UserBoard } = require('../models').models;
 const db = require('../models');
 
 module.exports = {
@@ -73,6 +73,12 @@ module.exports = {
     } catch (e) {
       next(e);
     }
+  },
+
+  test(req, res) {
+    return User.findAll({ where: { id: 1 }, include: ['boards'] })
+      .then(u => res.send(u))
+      .catch(e => console.log(e))
   }
 
 };
