@@ -28,13 +28,27 @@ module.exports = {
         id: payload.id,
         username: payload.username
       },
-      'inspirit'
+      'intspirit'
     );
 
     return {
       exp,
       id: sign
     }
+  },
+
+  verifyToken(req, res, next) {
+    const token = req.headers.token;
+
+    jwt.verify(token, 'intspirit', (err, decoded) => {
+      if (decoded) {
+        req._userId = decoded.id;
+        req._userName = decoded.name;
+        next();
+      } else {
+        res.status(401).send({ message: 'Authorization failed' });
+      }
+    });
   }
 
 };

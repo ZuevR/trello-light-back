@@ -1,4 +1,4 @@
-const { User, Token, Board, UserBoard } = require('../models').models;
+const { User, Token } = require('../models').models;
 const db = require('../models');
 
 module.exports = {
@@ -24,8 +24,8 @@ module.exports = {
 
   async signin(req, res, next) {
     try {
-
-      const user = await User.findOne({ where: { email: req.body.email, status: true } });
+      const user = await User.findOne({ where: { email: req.body.email } });
+      if (!user.status) return res.status(404).send({ errors: [{ message: 'Registration has not been confirmed' }] });
       if (!user) return res.status(404).send({ errors: [{ message: 'User with this email does not exist' }] });
       if (!user.validatePassword(req.body.password)) return res.status(401).send({ errors: [{ message: 'Wrong password' }] });
       await user.setAuthKey();
@@ -73,12 +73,6 @@ module.exports = {
     } catch (e) {
       next(e);
     }
-  },
-
-  test(req, res) {
-    return User.findAll({ where: { id: 1 }, include: ['boards'] })
-      .then(u => res.send(u))
-      .catch(e => console.log(e))
   }
 
 };

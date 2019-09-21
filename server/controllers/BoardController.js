@@ -4,14 +4,18 @@ const db = require('../models');
 module.exports = {
 
   async getBoards(req, res, next) {
-    const boards = await Board.findAll({
-      include: [{
-        model: User,
-        as: 'users',
-        where: { id: 1 }
-      }]
-    });
-    res.send(boards);
+    try {
+      const boards = await Board.findAll({
+        include: [{
+          model: User,
+          as: 'users',
+          where: { id: req._userId }
+        }]
+      });
+      res.send(boards);
+    } catch (e) {
+      next(e);
+    }
   },
 
   async createBoard(req, res, next) {

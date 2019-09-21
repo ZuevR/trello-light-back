@@ -6,7 +6,7 @@ import { MainPageComponent } from './components/pages/main-page/main-page.compon
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
-  { path: ':userName/boards', component: MainPageComponent },
+  { path: 'boards', component: MainPageComponent },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(value => value.AuthModule) }
 ];
 
