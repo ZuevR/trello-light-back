@@ -6,6 +6,7 @@ const cors = require('cors');
 
 
 const authRoutes = require('./api/v1/routes/auth');
+const boardRoutes = require('./api/v1/routes/boards');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/boards', boardRoutes);
 
 // app.use('/', (req, res) => {
 //   console.log('it works');

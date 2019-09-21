@@ -21,7 +21,7 @@ module.exports = {
   },
 
   generateToken(payload) {
-    const exp = Math.floor(Date.now() / 1000) + 3600;
+    const exp = Math.floor(Date.now() / 1000) + (3600 * 24);
 
     const sign = jwt.sign({
         exp,

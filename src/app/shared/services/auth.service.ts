@@ -10,7 +10,6 @@ import { AuthResponse, User } from '../interfaces';
 export class AuthService {
 
   public error$: Subject<string> = new Subject<string>();
-  public currentUser;
 
   constructor(
     private http: HttpClient

@@ -11,6 +11,4 @@ router.get('/confirm', UserController.confirm);
 
 router.post('/new-email', UserController.sendNewVerificationEmail);
 
-router.get('/test', UserController.test);
-
 module.exports = router;
