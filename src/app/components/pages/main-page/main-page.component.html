@@ -14,12 +14,32 @@
       <div class="col-lg-9">
         <div class="boards">
 
-          <div class="item">
-            <h4 class="item-title">Create</h4>
+          <div class="item"
+               *ngFor="let board of boards">{{ board.title }}
           </div>
+
+          <div class="item add-button" (click)="openModal(modal)">Create board</div>
 
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<ng-template #modal>
+  <div class="modal-body">
+    <form class="form-group justify-content-between mb-0" [formGroup]="form">
+      <div class="form-group w-75">
+        <input type="text"
+               class="form-control w-100 bg-light shadow-none"
+               placeholder="Add board's title" formControlName="title">
+      </div>
+      <button type="button" class="close position-absolute" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <button type="submit"
+              class="btn btn-success"
+              [disabled]="form.invalid || submitting" (click)="createBoard()">Create board</button>
+    </form>
+  </div>
+</ng-template>

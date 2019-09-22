@@ -22,8 +22,8 @@ module.exports = {
     let transaction;
     try {
       transaction = await db.sequelize.transaction();
-      const newBoard = await Board.create({ title: 'test', ownerId: 1 }, { transaction });
-      await UserBoard.create({ userId: 1, boardId: newBoard.id }, { transaction });
+      const newBoard = await Board.create({ title: req.body.title, ownerId: req._userId }, { transaction });
+      await UserBoard.create({ userId: req._userId, boardId: newBoard.id }, { transaction });
       await transaction.commit();
       res.status(201).send(newBoard);
     } catch (e) {

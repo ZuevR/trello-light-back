@@ -5,6 +5,12 @@ export interface User {
   password: string;
 }
 
+export interface Board {
+  id?: number;
+  title: string;
+  ownerId?: number;
+}
+
 export interface AuthResponse {
   auth_key: {
     exp: number,

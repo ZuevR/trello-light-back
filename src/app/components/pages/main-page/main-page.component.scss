@@ -51,11 +51,42 @@
       padding: 10px;
       border-radius: 10px;
       background-color: lightgray;
+      transition: all .2s linear;
+      cursor: pointer;
 
-      &-title {
+      //&-title {
+      //  font-family: 'Ubuntu', sans-serif;
+      //  font-weight: 400;
+      //}
+
+      &.add-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(9,30,66,.04);
+        color: #0079bf;
         font-family: 'Ubuntu', sans-serif;
         font-weight: 400;
+
+        &:hover {
+          background-color: rgba(9, 30, 66, .08);
+        }
+
+        &:active {
+          background-color: #e4f0f6;
+        }
       }
     }
+  }
+}
+
+.modal-body {
+  font-family: 'Ubuntu', sans-serif;
+
+  .close {
+    top: 5px;
+    right: 10px;
+    z-index: 2;
+    outline: none;
   }
 }
