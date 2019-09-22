@@ -11,12 +11,14 @@ import { AppComponent } from './app.component';
 import { WelcomePageComponent } from './components/pages/welcome-page/welcome-page.component';
 import { MainPageComponent } from './components/pages/main-page/main-page.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomePageComponent,
-    MainPageComponent
+    MainPageComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,

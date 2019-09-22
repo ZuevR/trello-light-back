@@ -14,9 +14,9 @@
       <div class="col-lg-9">
         <div class="boards">
 
-          <div class="item"
-               *ngFor="let board of boards">{{ board.title }}
-          </div>
+          <a class="item" *ngFor="let board of boards" [routerLink]="['/boards', board.id]">
+            <app-board [board]="board"></app-board>
+          </a>
 
           <div class="item add-button" (click)="openModal(modal)">Create board</div>
 
@@ -39,7 +39,8 @@
       </button>
       <button type="submit"
               class="btn btn-success"
-              [disabled]="form.invalid || submitting" (click)="createBoard()">Create board</button>
+              [disabled]="form.invalid || submitting" (click)="createBoard()">Create board
+      </button>
     </form>
   </div>
 </ng-template>

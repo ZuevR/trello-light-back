@@ -50,14 +50,10 @@
       margin: 15px;
       padding: 10px;
       border-radius: 10px;
-      background-color: lightgray;
+      background-color: rgb(0, 121, 191);
       transition: all .2s linear;
+      text-decoration: none;
       cursor: pointer;
-
-      //&-title {
-      //  font-family: 'Ubuntu', sans-serif;
-      //  font-weight: 400;
-      //}
 
       &.add-button {
         display: flex;
@@ -75,6 +71,10 @@
         &:active {
           background-color: #e4f0f6;
         }
+      }
+
+      &:hover {
+        background-color: #185b8e;
       }
     }
   }
