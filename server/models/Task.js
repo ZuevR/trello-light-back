@@ -2,7 +2,7 @@
 
 const Sequelize = require('sequelize');
 
-module.exports = class Board extends Sequelize.Model {
+module.exports = class Task extends Sequelize.Model {
 
   static init(sequelize) {
     return super.init({
@@ -13,26 +13,26 @@ module.exports = class Board extends Sequelize.Model {
         allowNull: false
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      ownerId: {
-        type: Sequelize.INTEGER
+      description: {
+        type: Sequelize.TEXT
+      },
+      boardId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       }
 
     }, {
       sequelize,
       timestamps: false,
-      tableName: 'boards'
+      tableName: 'tasks'
     })
   };
 
   static associate(models) {
-    this.belongsToMany(models.User, {
-      through: { model: models.UserBoard },
-      foreignKey: 'boardId',
-      as: 'users'
-    });
-    this.hasMany(models.Task, { foreignKey: 'boardId', as: 'tasks' });
+    this.belongsTo(models.Board, { foreignKey: 'boardId', as: 'board' });
   }
 
 };
