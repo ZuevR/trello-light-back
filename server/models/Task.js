@@ -19,6 +19,13 @@ module.exports = class Task extends Sequelize.Model {
       description: {
         type: Sequelize.TEXT
       },
+      status: {
+        type: Sequelize.ENUM('TODO', 'PROGRESS', 'DONE'),
+        allowNull: false
+      },
+      position: {
+        type: Sequelize.INTEGER
+      },
       boardId: {
         type: Sequelize.INTEGER,
         allowNull: false
