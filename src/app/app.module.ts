@@ -12,8 +12,9 @@ import { WelcomePageComponent } from './components/pages/welcome-page/welcome-pa
 import { MainPageComponent } from './components/pages/main-page/main-page.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { BoardComponent } from './components/board/board.component';
-import { MainLayoutComponent } from './shred/components/main-layout/main-layout.component';
+import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { BoardPageComponent } from './components/pages/board-page/board-page.component';
+import { BoardTitleComponent } from './components/board-title/board-title.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BoardPageComponent } from './components/pages/board-page/board-page.com
     MainPageComponent,
     BoardComponent,
     MainLayoutComponent,
-    BoardPageComponent
+    BoardPageComponent,
+    BoardTitleComponent
   ],
   imports: [
     BrowserModule,

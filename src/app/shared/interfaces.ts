@@ -1,3 +1,5 @@
+enum Status { 'TODO', 'PROGRESS', 'DONE' }
+
 export interface User {
   id?: number;
   username?: string;
@@ -9,6 +11,15 @@ export interface Board {
   id?: number;
   title: string;
   ownerId?: number;
+  tasks?: Array<Task>;
+}
+
+export interface Task {
+  id?: number;
+  title: string;
+  position: number;
+  status: Status;
+  description?: string;
 }
 
 export interface AuthResponse {

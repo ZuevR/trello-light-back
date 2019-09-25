@@ -1,0 +1,10 @@
+<button #btn
+        class="board-title"
+        [ngStyle]="{display: display ? 'none' : 'inline-block'}"
+        (click)="showInput()"
+>{{ title }}</button>
+<input #inp
+       [ngStyle]="{display: display ? 'inline-block' : 'none'}"
+       (blur)="changeTitle()"
+       class="board-title inp"
+       type="text">

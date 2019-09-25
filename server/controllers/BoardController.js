@@ -1,4 +1,4 @@
-const { Board, User, UserBoard } = require('../models').models;
+const { Board, User, UserBoard, Task } = require('../models').models;
 const db = require('../models');
 
 module.exports = {
@@ -13,6 +13,27 @@ module.exports = {
         }]
       });
       res.send(boards);
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  async getBoard(req, res, next) {
+    const boardId = +req.params.id;
+    const userId = req._userId;
+    try {
+      const userBoards = await UserBoard
+        .findAll({ where: { userId }, attributes: ['boardId'] })
+        .then(idx => idx.map(item => item.boardId));
+      if (userBoards.includes(boardId)) {
+        const board = await Board.findByPk(boardId, {
+          include: [{ model: Task, as: 'tasks' }]
+        });
+        res.send(board);
+      } else {
+        res.status(403).send({message: 'Permission denied' });
+      }
+      // throw new Error('Уупс!');
     } catch (e) {
       next(e);
     }

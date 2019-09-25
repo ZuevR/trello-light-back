@@ -14,7 +14,15 @@ export class BoardService {
     return this.http.get(`${ environment.host }/api/v1/boards`);
   }
 
+  getBoard(id: string) {
+    return this.http.get(`${ environment.host }/api/v1/boards/${ id }`);
+  }
+
   createNewBoard(board: Board) {
     return this.http.post(`${ environment.host }/api/v1/boards`, board);
+  }
+
+  changeBoard(board: Board) {
+    return this.http.patch(`${ environment.host }/api/v1/boards`, board);
   }
 }
