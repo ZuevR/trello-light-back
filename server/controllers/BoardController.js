@@ -31,9 +31,8 @@ module.exports = {
         });
         res.send(board);
       } else {
-        res.status(403).send({message: 'Permission denied' });
+        res.status(403).send({ message: 'Permission denied' });
       }
-      // throw new Error('Уупс!');
     } catch (e) {
       next(e);
     }
@@ -51,5 +50,23 @@ module.exports = {
       if (transaction) await transaction.rollback();
       next(e);
     }
+  },
+
+  async changeBoardTitle(req, res, next) {
+    const userId = req._userId;
+    if (userId !== req.body.ownerId) {
+      return res.status(403).send({ message: 'Permission denied' });
+    }
+    try {
+      await Board.update({
+        title: req.body.title
+      }, {
+        where: { id: req.body.id }
+      });
+      return res.status(200).send({ title: req.body.title });
+    } catch (e) {
+      next(e);
+    }
+
   }
 };

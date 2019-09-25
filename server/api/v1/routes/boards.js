@@ -9,4 +9,6 @@ router.get('/:id', SecureHelper.verifyToken, BoardController.getBoard);
 
 router.post('/', SecureHelper.verifyToken, BoardController.createBoard);
 
+router.patch('/', SecureHelper.verifyToken, BoardController.changeBoardTitle);
+
 module.exports = router;

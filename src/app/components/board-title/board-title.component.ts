@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-board-title',
@@ -8,6 +8,7 @@ import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } fro
 export class BoardTitleComponent implements OnInit, AfterViewChecked {
 
   @Input() title: string;
+  @Output() titleChange: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('btn', { static: false }) button: ElementRef;
   @ViewChild('inp', { static: false }) input: ElementRef;
 
@@ -48,9 +49,9 @@ export class BoardTitleComponent implements OnInit, AfterViewChecked {
   changeTitle() {
     const newTitle = this.input.nativeElement.value;
     if (newTitle !== this.title && newTitle.trim()) {
-      console.log(newTitle);
-    } else {
-      this.showButton();
+      this.titleChange.emit(newTitle);
     }
+    this.showButton();
   }
+
 }

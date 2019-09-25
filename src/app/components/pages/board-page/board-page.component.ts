@@ -28,7 +28,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
     this.bSub = this.boardService.getBoard(this.id).subscribe((board: Board) => {
       this.board = board;
-      console.log(board);
     }, error => {
       if (error.status === 403) {
         this.router.navigate(['/boards']);
@@ -42,4 +41,13 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  changeBoard(newTitle: string) {
+    const oldTitle = this.board.title;
+    this.board.title = newTitle;
+    this.boardService.changeBoard(this.board).subscribe(result => {
+      console.log(result);
+    }, () => {
+      this.board.title = oldTitle;
+    });
+  }
 }
