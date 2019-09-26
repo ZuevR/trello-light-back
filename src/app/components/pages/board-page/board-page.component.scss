@@ -6,5 +6,26 @@
   .board-header {
     display: flex;
     justify-content: space-between;
+
+    .delete {
+      border: 0;
+      border-radius: 3px;
+      outline: none;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 35px;
+      color: #ffffff;
+      padding: 0 12px;
+      cursor: pointer;
+      background-color: transparent;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+
+      &:active {
+        background-color: rgba(255, 255, 255, 0.35);
+      }
+    }
   }
 }

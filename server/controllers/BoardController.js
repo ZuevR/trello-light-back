@@ -61,12 +61,29 @@ module.exports = {
       await Board.update({
         title: req.body.title
       }, {
-        where: { id: req.body.id }
+        where: { id: req.body.id, ownerId: req.body.ownerId }
       });
       return res.status(200).send({ title: req.body.title });
     } catch (e) {
       next(e);
     }
+  },
 
+  async deleteBoard(req, res, next) {
+    const userId = req._userId;
+    let transaction;
+    try {
+      transaction = await db.sequelize.transaction();
+      const board = await Board.findByPk(req.params.id, { transaction });
+      if (userId !== board.ownerId) {
+        return res.status(403).send({ message: 'Permission denied' });
+      }
+      await Board.destroy({ where: { id: req.params.id } });
+      await transaction.commit();
+      res.status(200).send({ message: 'OK' });
+    } catch (e) {
+      if (transaction) await transaction.rollback();
+      next(e);
+    }
   }
 };

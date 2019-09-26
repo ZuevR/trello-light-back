@@ -4,8 +4,8 @@
       (titleChange)="changeBoard($event)"
       [title]="board?.title"
     ></app-board-title>
-    <div class="right-menu">
-      DEL
-    </div>
+    <button class="delete" (click)="confirmDelete()">
+      Delete board
+    </button>
   </div>
 </div>

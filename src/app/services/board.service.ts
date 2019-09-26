@@ -25,4 +25,8 @@ export class BoardService {
   changeBoard(board: Board) {
     return this.http.patch(`${ environment.host }/api/v1/boards`, board);
   }
+
+  deleteBoard(id: string) {
+    return this.http.delete(`${ environment.host }/api/v1/boards/${ id }`);
+  }
 }

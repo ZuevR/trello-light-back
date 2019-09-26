@@ -6,5 +6,6 @@
 <input #inp
        [ngStyle]="{display: display ? 'inline-block' : 'none'}"
        (blur)="changeTitle()"
+       (keyup.enter)="changeTitle()"
        class="board-title inp"
        type="text">

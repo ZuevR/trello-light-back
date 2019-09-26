@@ -11,4 +11,6 @@ router.post('/', SecureHelper.verifyToken, BoardController.createBoard);
 
 router.patch('/', SecureHelper.verifyToken, BoardController.changeBoardTitle);
 
+router.delete('/:id', SecureHelper.verifyToken, BoardController.deleteBoard);
+
 module.exports = router;

@@ -46,8 +46,22 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.board.title = newTitle;
     this.boardService.changeBoard(this.board).subscribe(result => {
       console.log(result);
-    }, () => {
+    }, error => {
+      console.log(error);
       this.board.title = oldTitle;
     });
   }
+
+  confirmDelete() {
+    const a = confirm('Do you really want to delete this board?');
+    if (a) {
+      this.boardService.deleteBoard(this.id).subscribe(result => {
+        this.router.navigate(['/boards']);
+        console.log(result);
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+
 }
