@@ -25,9 +25,9 @@ module.exports = {
   async signin(req, res, next) {
     try {
       const user = await User.findOne({ where: { email: req.body.email } });
-      if (!user.status) return res.status(404).send({ errors: [{ message: 'Registration has not been confirmed' }] });
+      if (user && !user.status) return res.status(404).send({ errors: [{ message: 'Registration has not been confirmed' }] });
       if (!user) return res.status(404).send({ errors: [{ message: 'User with this email does not exist' }] });
-      if (!user.validatePassword(req.body.password)) return res.status(401).send({ errors: [{ message: 'Wrong password' }] });
+      if (!user && !user.validatePassword(req.body.password)) return res.status(401).send({ errors: [{ message: 'Wrong password' }] });
       await user.setAuthKey();
       res.status(200).send(user);
     } catch (e) {
