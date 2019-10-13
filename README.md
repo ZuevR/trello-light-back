@@ -31,6 +31,11 @@ CONFIGURATION
 
 - Edit the file `.env-example` with real data and change filename to `.env`:
 
+- ***In order for the application to work correctly, in the `.env` file,
+ you must specify the email address which has a policy for sending emails
+ to third-party programs. Since when registering a new user, the application
+ will send a letter to confirm registration.***
+
 Initialization
 -------------
 ### Database
